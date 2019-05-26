@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-servers',
@@ -12,7 +13,9 @@ export class ServersComponent implements OnInit {
   username = '';
   enteredUserName = '';
   serverEntered = false;
-  constructor() {
+  displayDetails = false;
+  displayDetailsLog = [];
+  constructor(private datePipe: DatePipe) {
     setTimeout(() => {
       this.allowNewServer = false;
     }, 2000);
@@ -35,5 +38,15 @@ export class ServersComponent implements OnInit {
       this.enteredUserName = this.username;
       this.username = '';
     }
+  }
+
+  onDisplayDetails() {
+    this.displayDetails = !this.displayDetails;
+    const date = new Date();
+    this.displayDetailsLog.push('Display Details button is clicked at ' + this.datePipe.transform(date, 'yyyy-MM-dd hh:mm:ss'));
+  }
+
+  getColor(index) {
+    return index >= 4 ? 'blue' : 'white';
   }
 }

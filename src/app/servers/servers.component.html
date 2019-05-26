@@ -3,7 +3,13 @@
   <br/>
   <p>{{ serverName }}</p>
 <button class="btn btn-primary" [disabled]="allowNewServer" (click)="onServerCreation()">Add New Server</button>
+<button class="btn btn-primary" (click)="onDisplayDetails()">Display Details</button>
 <p *ngIf="serverEntered; else noServer">Server is created. Server name is {{ serverName }}</p>
+<div *ngIf="displayDetails">
+  <p *ngFor="let displayDetail of displayDetailsLog; let i = index;">
+    <span [ngStyle]="{backgroundColor: getColor(i)}" [ngClass]="{displayDetails: i >= 4}">{{displayDetail}}</span>
+  </p>
+</div>
 <ng-template #noServer>
   <p>No server was created!</p>
 </ng-template>
